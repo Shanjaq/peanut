@@ -1,0 +1,11 @@
+10
+rick3 progs2.dat
+rick4 progs2.dat
+rick5 progs2.dat
+rick6 progs2.dat
+rick7 progs2.dat
+rider1a progs2.dat
+rider2c progs2.dat
+meso9 progs2.dat
+romeric6 progs2.dat
+eidolon progs2.dat
