@@ -68,7 +68,7 @@ void ()tol_think = {
 				head.health += self.spelldamage;
 			}
 			if (head.elemana < head.max_mana) {
-				head.elemana += 3;
+				head.elemana += self.spelldamage;
 			}
 			//			sound ( self, CHAN_AUTO, "ambience/birds.wav", 1.00000, ATTN_NORM);
 		}
