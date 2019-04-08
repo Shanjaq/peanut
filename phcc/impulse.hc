@@ -1,3 +1,4 @@
+void() check_statuses;
 void  ()reset_inning_scores;
 void  ()check_rank;
 float ()room_descriptor;
@@ -666,7 +667,7 @@ void  ()ImpulseCommands =  {
 																								self.Rfinger4Support = random(0, 31);
 																								self.Rfinger5Support = random(0, 31);
 																								*/
-																								
+																								/*
 																								self.Lfinger1Support += 1;
 																								self.Lfinger2Support += 1;
 																								self.Lfinger3Support += 1;
@@ -678,6 +679,8 @@ void  ()ImpulseCommands =  {
 																								self.Rfinger4Support += 1;
 																								self.Rfinger5Support += 1;
 																								spells_compute(self);
+																								*/
+																								check_statuses();
 																							} else {
 
 																								if ( (self.impulse == 53.00000) ) {

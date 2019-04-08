@@ -14,7 +14,14 @@ void() arc_pulse_touch = {
 	self.skin = 0.00000;
 	self.scale = 1.80000;
 	if (other.takedamage == DAMAGE_YES)
-		T_Damage ( other, self, self.owner, self.spelldamage + random(self.spelldamage*(-0.75000), self.spelldamage*0.75000));
+	{
+		self.dmg = self.spelldamage + random(self.spelldamage*(-0.75000), self.spelldamage*0.75000);
+		
+		if (other.status_effects & STATUS_WET)
+			self.dmg *= 3.62500;
+
+		T_Damage ( other, self, self.owner, self.dmg);
+	}
 
 	sound (self, CHAN_AUTO, "baer/gntact1.wav", 1, ATTN_NORM);
 	//T_RadiusDamage (self, self.owner, 24, other);
@@ -117,7 +124,11 @@ void() arc_transit = {
 			}
 			particle2 ( (self.origin + random('-30 -30 -30', '30 30 30')), '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', (144.00000 + random(15.00000)), 2, 80.00000);
 			if (test == 0) {
-				do_lightning ( self, 3, STREAM_ATTACHED, 3.00000, self.origin, self.enemy.origin, (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.spelldamage*0.50000));
+				self.dmg = self.spelldamage*0.50000;
+				if (self.enemy.status_effects & STATUS_WET)
+					self.dmg *= 3.62500;
+				
+				do_lightning ( self, 3, STREAM_ATTACHED, 3.00000, self.origin, self.enemy.origin, (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.dmg));
 				arc_pulse(-800);
 			}
 			traceline (self.origin , (self.origin-('0 0 1024')) , FALSE, self);

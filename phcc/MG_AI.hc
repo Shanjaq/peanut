@@ -954,6 +954,7 @@ local vector dir = '0.00000 0.00000 0.00000';
    while ( (diff_count > 0.00000) ) {
 
       traceline ( startpos, (startpos - '0.00000 0.00000 18.00000'), TRUE, self);
+	  //tracearea ( startpos, (startpos  - '0.00000 0.00000 18.00000'), self.mins, self.maxs, FALSE, self);
       if ( (trace_fraction == 1.00000) ) {
 
          return ( FALSE );
@@ -1101,6 +1102,8 @@ local vector vec2 = '0.00000 0.00000 0.00000';
    eta_delta = (eta2 - eta1);
    p3 += (((targ_dir * tspeed) * eta_delta) * random());
    traceline ( p1, p3, FALSE, self);
+   dprint("BARF128\n");
+
    if ( (trace_fraction < 1.00000) ) {
 
       if ( (trace_ent.thingtype >= THINGTYPE_WEBS) ) {

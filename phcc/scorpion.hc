@@ -326,6 +326,9 @@ local vector source = '0.00000 0.00000 0.00000';
    }
    damage += random(0.10000,1.00000);
    T_Damage ( self.enemy, self, self, damage);
+  if (random() < 0.7)
+	  apply_status(trace_ent, STATUS_POISON, 1.36250, 6);
+
 };
 
 

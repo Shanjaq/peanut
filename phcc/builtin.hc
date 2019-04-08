@@ -339,6 +339,22 @@ void end_sys_fields;
 .float missile_rate_low alias rings_low;
 .float missile_rate_high alias monster_check;
 .float missile_count alias monsterclass;
+.float burn_time alias cnt_torch;
+.float poison_time alias cnt_h_boost;
+.float wet_time alias cnt_sh_boost;
+.float toxic_time alias cnt_mana_boost;
+.float burn_next alias cnt_teleport;
+.float poison_next alias cnt_tome;
+.float wet_next alias cnt_summon;
+.float toxic_next alias cnt_invisibility;
+.float burn_dmg alias cnt_glyph;
+.float poison_dmg alias cnt_haste;
+.float wet_dmg alias cnt_blast;
+.float toxic_dmg alias cnt_polymorph;
+.float burn_cnt alias cnt_flight;
+.float poison_cnt alias cnt_cubeofforce;
+.float burn_duration alias cnt_invincibility;
+.float poison_duration alias bluemana;
 .float turn_time;
 .float failchance;
 .string failtarget;
@@ -505,6 +521,7 @@ vector tp;
 .float glow_time alias step3;
 .float glow_delay alias step4;
 entity chars;
+entity status_head;
 .float charsaved;
 float nextsave;
 //player 1 data
@@ -566,7 +583,7 @@ float spell_cost[37] = { 0,
 };
 float spell_damage[37] = { 0,
 	0, 0, 0, 60, 22, 16,
-	6, 26, 28, 28, 30, 38,
+	1.8, 26, 28, 28, 30, 38,
 	12, 14, 12, 21, 32, 40,
 	4, 10, 128, 20, 30, 35,
 	2, 8, 7, 26, 32, 8,
@@ -624,6 +641,8 @@ float survivor;
 .float htype;
 float STATUS_BURNING = 1;
 float STATUS_POISON = 2;
+float STATUS_WET = 4;
+float STATUS_TOXIC = 8;
 .float status_effects;
 .float arrows;
 float transporter_active;
@@ -663,9 +682,6 @@ float clap;
 .float predebt;
 .string close_target;
 .float monsterlevel; // BAER so monsters can level up with the player
-//Shan now used for player events per-second
-.float poisoncount;
-.float healthcount;
 .vector stickydir;	// BAER for the paladin glyph reference.
 .float max_scale;	   // BAER for the spiders and anything else
 .float glyph_time;	// BAER to stop the chaingunning effect of glyphs

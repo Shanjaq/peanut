@@ -171,7 +171,9 @@ local float ldmg = 0.00000;
    if ( (self.model == "models/spider.mdl") ) {
 
       ldmg = random((self.scale * 3.00000));
-      if ((random() < 0.7) && (trace_ent.poisoncount < 15)) trace_ent.poisoncount += ceil(random() * 4);
+	  if (random() < 0.7)
+		  apply_status(trace_ent, STATUS_POISON, 0.63750, 9);
+	  
    } else {
 
       ldmg = random(9.00000);

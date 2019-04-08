@@ -2,6 +2,7 @@ void  ()SUB_regen;
 void  ()StartItem;
 void  ()ring_touch;
 float(entity forwhom, float themod) spellmod_give;
+void(entity forent, float status_effect) remove_status;
 
 void  ()artifact_touch =  {
 	local string gpoz;
@@ -693,14 +694,14 @@ void  ()use_healthboost =  {
 
 	}
 	self.cnt_h_boost -= 1.00000;
-	//   self.health += 25.00000;
-	self.health += 20.00000;
-	self.healthcount += 10.00000;
-	self.poisoncount = 0.00000;
+	self.health += 25.00000;
 	sound ( self, CHAN_BODY, "misc/whoosh.wav", 1.00000, ATTN_NORM);
-	if ( (self.health > (self.max_health * 2)) ) {
+	if (self.status_effects & STATUS_POISON)
+		remove_status(self, STATUS_POISON);
+	
+	if ( (self.health > self.max_health) ) {
 
-		self.health = (self.max_health * 2);
+		self.health = self.max_health;
 
 	}
 };

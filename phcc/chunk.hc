@@ -1,8 +1,8 @@
 void  (vector spot)CreateYRFlash;
 void  (vector org,vector vel,float framelength)CreateWhiteSmoke;
 void  ()make_bloodcount_reset;
-void  (entity victim, float amount)ignite;
-void() toxic_cloud_contamination_think;
+void  (entity forent, float status_effect, float damage, float duration)apply_status;
+entity (entity forent, float query_flags)status_controller_get;
 
 .float ftype;
 void  (vector slope)pitch_roll_for_slope;
@@ -213,14 +213,14 @@ void() blood_drop = {
 		chunk.classname = "bloodspot";
 		chunk.movetype = MOVETYPE_TOSS;
 		chunk.solid = SOLID_PHASE;
-		chunk.velocity = random('-300 -300 -30','300 300 150'); // notice the accent on the up velocity
+		chunk.velocity = random('-300 -300 -30','300 300 150');
 
 		chunk.touch = blood_drop_timer;
 		AdvanceThinkTime(chunk, HX_FRAME_TIME);
 		chunk.think = blood_fall_timer;
 
 		setmodel (chunk, "models/bloodspot.mdl");
-		if (self.status_effects & STATUS_POISON)
+		if (self.status_effects & STATUS_TOXIC)
 			chunk.skin = 2;
 		
 		chunk.scale = (0.25000 + random(1.62500));
@@ -478,23 +478,7 @@ void(vector pos) slime_drop =
 	found = T_RadiusDamageFlat (chunk, chunk.owner, (chunk.spelldamage + random(chunk.spelldamage*(-0.12500), chunk.spelldamage*0.12500))*0.12500, 128.00000, chunk.owner, 2);
 	while (found)
 	{
-		if (!(found.status_effects & STATUS_POISON))
-		{
-			sound ( found, CHAN_AUTO, "crusader/sunhit.wav", 1.00000, ATTN_NORM);
-			found.status_effects |= STATUS_POISON;
-			newmis = spawn();
-			newmis.spelldamage = self.spelldamage * 0.12500;
-			newmis.spellradiusmod = self.spellradiusmod;
-			newmis.owner = self.owner;
-			newmis.oldenemy = found;
-			newmis.movetype = MOVETYPE_NOCLIP;
-			newmis.solid = SOLID_NOT;
-			newmis.lifetime = random(7, 11);
-			newmis.splash_time = (time + newmis.lifetime);
-			newmis.think = toxic_cloud_contamination_think;
-			AdvanceThinkTime(newmis, HX_FRAME_TIME);
-		}	
-
+		apply_status(found, STATUS_TOXIC, (self.spelldamage * 0.12500), random(7, 11));
 		found = found.chain2;
 	}
 };

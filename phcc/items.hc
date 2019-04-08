@@ -488,20 +488,17 @@ void  ()ihealth_touch =  {
 		return ;
 
 	}
-	if (other.predebt == 1) {
-		other.debt = (other.debt + 10);
-	}
-	if ( (other.health < (other.max_health * 2)) ) {
+	if ( (other.health < other.max_health) ) {
 
 		sound ( other, CHAN_VOICE, "items/itempkup.wav", 1.00000, ATTN_NORM);
-		other.healthcount += 10.00000;
-		other.poisoncount = 0;
-
-		//      if ( (other.health > (other.max_health * 2)) ) {
-
-		//         other.health = (other.max_health * 2);
-
-		//      }
+		if (other.status_effects & STATUS_POISON)
+			remove_status(other, STATUS_POISON);
+		
+	  if ((other.health + 10) > other.max_health)
+		 other.health = other.max_health;
+	  else
+		 other.health += 10;
+	  
 		self.model = string_null;
 		self.solid = SOLID_NOT;
 		if ( (deathmatch == 1.00000) ) {
