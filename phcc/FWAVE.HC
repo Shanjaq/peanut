@@ -45,7 +45,7 @@ void() FireWaveThink =
 void() firewave_touch =
 {
 	if ((other != world) && (other.takedamage == DAMAGE_YES))
-		ignite(other, 1);
+		apply_status(other, STATUS_BURNING, self.spelldamage, 8);
 	
 	remove(self);
 };

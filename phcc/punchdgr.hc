@@ -56,6 +56,9 @@ local float c_level = 0.00000;
             damage_base = WEAPON1_PWR_BASE_DAMAGE;
             damage_mod = WEAPON1_PWR_ADD_DAMAGE;
             CreateWhiteFlash ( org);
+            if (random() < 0.7)
+              apply_status(trace_ent, STATUS_POISON, 1.36250, 9);
+
             if ( (trace_ent.mass <= 10.00000) ) {
 
                inertia = 1.00000;

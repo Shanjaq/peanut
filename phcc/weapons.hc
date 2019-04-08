@@ -1452,33 +1452,6 @@ void  ()W_WeaponFrame =  {
 	local float regen_amount;
 	
 	ImpulseCommands ( );
-	if (time >= self.monsterlevel) {
-		self.monsterlevel = (time + 1.0);
-		if (self.poisoncount > 0) {
-			self.poisoncount -= 1;
-			T_Damage ( self, self.enemy, self.enemy, 1);
-		} else {
-			self.poisoncount = 0;
-		}
-		if (self.healthcount > 0) {
-			self.healthcount -= 1;
-			
-			//crashums!
-			if ( (self.health >= (self.max_health * 2)) ) {
-				self.health = (self.max_health * 2);
-			} else {
-				self.healthcount = 12;
-				self.health += 1;
-			}
-
-		} else {
-			self.healthcount = 0;
-		}
-	} else {
-		if ((self.monsterlevel - time) > 1.0)
-		self.monsterlevel = time;
-	}
-
 
 	if ((self.mage) && (heresy)) 
 	{

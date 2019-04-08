@@ -2,6 +2,7 @@
 void  ()W_Precache =  {
    precache_sound2 ( "golem/awaken.wav");
    precache_sound2 ( "ambience/birds.wav");
+   precache_sound2 ( "ambience/newhum1.wav");
    precache_sound2 ( "zap4.wav");
    precache_sound2 ( "rw15ele5.wav");
    precache_sound2 ( "rw14nova.wav");

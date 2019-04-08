@@ -329,13 +329,13 @@ void  ()DarkExplosion =  {
 	self.spelldamage = (self.dmg * 0.25000);
 	self.spellradiusmod = 1.00000;
 	if ((random() < 0.5) && (self.enemy.takedamage == DAMAGE_YES) && (self.enemy.solid != SOLID_BSP))
-		ignite(self.enemy, rint(random(5.00000)));
-
+		apply_status(self.enemy, STATUS_BURNING, self.spelldamage, 8);
+	
 	found = found = findradius (self.origin, self.dmg);
 	while (found)
 	{
 		if ((random() < 0.5) && (found.takedamage == DAMAGE_YES) && (found.solid != SOLID_BSP) && (found != self.enemy) && (found != self.owner))
-			ignite(found, rint(random(5.00000)));
+			apply_status(found, STATUS_BURNING, self.spelldamage, 8);	
 		
 		found = found.chain;
 	}

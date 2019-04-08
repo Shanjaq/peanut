@@ -62,7 +62,6 @@ Teleport.hc
 Volcano.hc
 Frog.hc
 balloffire.hc
-burn.hc
 Fwave.hc
 STORM.hc
 //magnet.hc
@@ -148,3 +147,4 @@ fablade.hc
 fangel.hc
 eric.hc
 stats.hc
+status.hc

@@ -381,3 +381,61 @@ void  ()explosion_use =  {
 	particleexplosion ( self.origin, self.color, self.exploderadius, self.counter);
 };
 
+void ()burn_flame_think = {
+	if (time < self.splash_time)
+	{
+		if (self.goalentity.health)
+		{
+			setorigin (self, random(self.goalentity.absmin, self.goalentity.absmax));
+			if (self.owner != world)
+				self.scale = (0.75000 + ((self.owner.burn_cnt / 10.00000) * 1.6)) * random();
+			else
+				self.scale = (0.75000 * random());
+		}
+		else
+		{
+			setorigin (self, self.owner.origin + random('-32 -32 0', '32 32 12'));
+			self.scale = (0.75000 * random());
+		}
+		
+		if ((self.owner != world) && (self.owner.auraV))
+			self.splash_time = time;
+		
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 140.00000, 16, random(4.00000, 10.00000));
+		self.think = burn_flame_think;
+		AdvanceThinkTime(self, 0.16250);
+	}
+	else
+	{
+		if (self.owner != world)
+			self.owner.stepy -= 1;
+		self.think = ChunkShrink;
+		AdvanceThinkTime(self, HX_FRAME_TIME);
+	}
+};
+
+void ()burn_flame = {
+	newmis = spawn();
+	newmis.owner = self;
+	newmis.goalentity = self.goalentity;
+	newmis.hull = HULL_POINT;
+	newmis.solid = SOLID_NOT;
+	newmis.movetype = MOVETYPE_NOCLIP;
+	setmodel (newmis, "models/flamec.mdl");
+	newmis.classname = "flame";
+	
+	if (self.goalentity.health)
+		setorigin (newmis, newmis.goalentity.origin);
+	else
+		setorigin (newmis, self.origin);
+	
+	newmis.angles_x = 270;
+	newmis.drawflags |= (MLS_ABSLIGHT | DRF_TRANSLUCENT);
+	newmis.effects = EF_DIMLIGHT;
+	newmis.abslight = 1.00000;
+	newmis.lifetime = 3.00000;
+	newmis.splash_time = (time + newmis.lifetime);
+	AdvanceThinkTime(newmis, 0.1);
+	newmis.think = burn_flame_think;
+};
+

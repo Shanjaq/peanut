@@ -1049,8 +1049,11 @@ float DFL_SKIP_METAL = 16;
 entity (entity inflictor, entity attacker, float damage, float radius, entity ignore, float dmgflags)T_RadiusDamageFlat = {
 	local entity found, first, last;
 	local float skip;
+	local vector inflictor_org;
 	
-	found = findradius (inflictor.origin, radius);
+	inflictor_org = ((inflictor.absmin + inflictor.absmax) * 0.50000);
+	
+	found = findradius (inflictor_org, radius);
 	first = world;
 	last = world;
 

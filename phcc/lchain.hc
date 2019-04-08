@@ -19,6 +19,9 @@ void() lchain_think = {
 		else
 			self.dmg = (self.spelldamage + random(self.spelldamage*(-0.75000), self.spelldamage*1.50000));
 		
+		if (self.oldenemy.status_effects & STATUS_WET)
+			self.dmg *= 3.62500;
+		
 		do_lightning ( self.owner, 1, STREAM_ATTACHED, 3.00000, self.origin, ((self.oldenemy.absmax + self.oldenemy.absmin) * 0.50000), self.dmg);
 		setorigin (self, ((self.oldenemy.absmax + self.oldenemy.absmin) * 0.50000));
 	}

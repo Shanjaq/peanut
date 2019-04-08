@@ -1,5 +1,5 @@
 void ()aero_dissolve = {
-	local entity found;
+	local entity found, status;
 	local vector dir;
 	local float pc;
 	
@@ -40,7 +40,6 @@ void ()aero_dissolve = {
 		if (self.frame == 0)
 		{
 			makevectors(RandomVector('0 360 0'));
-			//particle2 ( (self.origin + ((v_forward * 16.00000) * self.spellradiusmod)), ('-96.00000 -96.00000 50.00000' + (v_right * 64)), ('96.00000 96.00000 300.00000' + (v_right * 128)), random(243, 246), PARTICLETYPE_BLOB, random(20.00000, 80.00000));
 
 			if ((pc != CONTENT_WATER) && (pc != CONTENT_SLIME))
 				if (self.status_effects & STATUS_BURNING)
@@ -49,17 +48,6 @@ void ()aero_dissolve = {
 					particle2 ( (self.origin + ((v_forward * 16.00000) * self.spellradiusmod)), ('-96.00000 -96.00000 50.00000' + (v_right * 64)), ('96.00000 96.00000 300.00000' + (v_right * 128)), random(243, 246), PARTICLETYPE_FASTGRAV, random(20.00000, 80.00000));
 			else
 				particle2 ( (self.origin + ((v_forward * 16.00000) * self.spellradiusmod)), ('-32.00000 -32.00000 6.00000' + (v_right * 64)), ('32.00000 32.00000 64.00000' + (v_right * 128)), random(151, 159), PARTICLETYPE_BLOB, random(20.00000, 80.00000));
-			
-			/*
-			if ((pc != CONTENT_WATER) && (pc != CONTENT_SLIME))
-				if (self.status_effects & STATUS_BURNING)
-					particle2 ( self.origin, '-32.00000 -32.00000 6.00000', '32.00000 32.00000 64.00000', (251.00000 + random(3.00000)), PARTICLETYPE_BLOB, 80.00000);
-				else
-					particle2 ( self.origin, '-190.00000 -190.00000 50.00000', '190.00000 190.00000 300.00000', random(243, 246), PARTICLETYPE_FASTGRAV, 80.00000);
-	
-			else
-				particle2 ( self.origin, '-32.00000 -32.00000 6.00000', '32.00000 32.00000 64.00000', random(151, 159), PARTICLETYPE_BLOB, 80.00000);
-			*/
 			
 			if (random() > 0.5)
 			{
@@ -71,9 +59,16 @@ void ()aero_dissolve = {
 				else
 				{
 					if ((pc == CONTENT_LAVA) && !(self.status_effects & STATUS_BURNING))
+					{
 						self.status_effects |= STATUS_BURNING;
+						self.burn_dmg = 4;
+						self.effects |= EF_DIMLIGHT;
+					}
 					else if (((pc == CONTENT_WATER) || (pc == CONTENT_SLIME)) && (self.status_effects & STATUS_BURNING))
+					{
 						self.status_effects ^= STATUS_BURNING;
+						self.effects ^= EF_DIMLIGHT;
+					}
 					
 					if (random() < 0.50000)
 						sound ( self, CHAN_AUTO, "player/swim1.wav", 1.00000, ATTN_NORM);
@@ -97,13 +92,18 @@ void ()aero_dissolve = {
 				if (self.status_effects & STATUS_BURNING)
 				{
 					if (random() < 0.36250)
-						ignite(found, 1);
-					
+						apply_status(found, STATUS_BURNING, self.burn_dmg, 8);
 				}
 				else
 				{
 					if (found.status_effects & STATUS_BURNING)
+					{
 						self.status_effects |= STATUS_BURNING;
+						self.effects |= EF_DIMLIGHT;
+						status = status_controller_get(found, FALSE);
+						if (status != world)
+							self.burn_dmg = status.burn_dmg;
+					}
 				}
 				
 				makevectors(dir);

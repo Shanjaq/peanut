@@ -21,6 +21,7 @@ void ()crushdrop_crash = {
 			}
 			head.velocity += normalize(head.origin - self.origin) * 1000;
 			head.velocity_z = random(250, 300);
+			apply_status(head, STATUS_WET, 1, 5);
 			
 			if (head != self.owner)
 				T_Damage (head, self, self.owner, self.spelldamage + random(self.spelldamage*(-0.12500), self.spelldamage*0.12500));
@@ -130,7 +131,6 @@ void (vector start)crushdrop_fx = {
 
 void ()crushdrop_think = {
 	local entity head;
-	local vector pos;
 
 	if (self.velocity_z > 0) {
 		head = findradius ( self.origin - '0 0 128', (135.00000*self.spellradiusmod));
@@ -144,15 +144,11 @@ void ()crushdrop_think = {
 				if (head != self.owner)
 					T_Damage (head, self, self.owner, random(1, 2));
 				
-				if ((head.takedamage == DAMAGE_YES) && (head.lockentity != world) && (head.lockentity.auraV != 1))
-					head.lockentity.auraV = 1;
-				
-				pos = random(head.absmin, head.absmax);
-				particle2 ( pos, '-30.00000 -30.00000 -30.00000', '30.00000 30.00000 30.00000', (16.00000 + random(15.00000)), PARTICLETYPE_BLOB2, random(16, 32));
 				head.velocity_x *= 0.7;
 				head.velocity_y *= 0.7;
 				head.velocity -= normalize(head.origin - self.origin) * 10;
 				head.velocity_z += random(160, 220);
+				apply_status(head, STATUS_WET, self.spelldamage, 5);
 			}
 			head = head.chain;
 		}

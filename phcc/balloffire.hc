@@ -118,7 +118,7 @@ void() balloffire_crash = {
 		other.velocity += random('-32 -32 10', '32 32 24');
 		
 		if (random() < 0.63750)
-			ignite(other, rint(random(5.00000)));
+			apply_status(other, STATUS_BURNING, (self.spelldamage * 0.12500), 8);
 	}
 	
 	found = T_RadiusDamageFlat (self, self.owner, self.dmg, 75.00000 * self.spellradiusmod, other, FALSE);
@@ -127,7 +127,7 @@ void() balloffire_crash = {
 		while (found)
 		{
 			if (random() < 0.5)
-				ignite(found, rint(random(5.00000)));
+				apply_status(found, STATUS_BURNING, (self.spelldamage * 0.12500), 8);
 			
 			found = found.chain2;
 		}

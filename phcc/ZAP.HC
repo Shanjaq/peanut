@@ -48,7 +48,11 @@ void  ()TouchRing4 =  {
 		//   }
 		if ( other.takedamage ) {
 
-			T_Damage ( other, self, self.owner, (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.spelldamage*0.50000));
+			self.dmg = (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.spelldamage*0.50000);
+			if (other.status_effects & STATUS_WET)
+				self.dmg *= 3.62500;
+
+			T_Damage ( other, self, self.owner, self.dmg);
 
 
 			WriteByte ( MSG_BROADCAST, SVC_TEMPENTITY);
@@ -78,7 +82,11 @@ void  ()yellowM1B =  {
 			
 			if (targ != world)
 			{
-				do_lightning ( self, 3, STREAM_ATTACHED, 0.50000, self.origin, ((targ.absmin + targ.absmax) * 0.50000), (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.spelldamage*0.50000));
+				self.dmg = (self.spelldamage*0.75000) + random(self.spelldamage*(-0.50000), self.spelldamage*0.50000);
+				if (targ.status_effects & STATUS_WET)
+					self.dmg *= 3.62500;
+				
+				do_lightning ( self, 3, STREAM_ATTACHED, 0.50000, self.origin, ((targ.absmin + targ.absmax) * 0.50000), self.dmg);
 			}
 			else
 			{
