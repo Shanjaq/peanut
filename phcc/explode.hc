@@ -137,7 +137,7 @@ void (float howbig, float howmuch)IceBoom =
 {
 	local entity head;
 	local float dist;
-	local string grr;
+	local vector move_angle;
 	dist = howbig;
 	head = findradius(self.origin, howbig);
 	while(head)
@@ -170,7 +170,9 @@ void (float howbig, float howmuch)IceBoom =
 	newmis.drawflags = MLS_ABSLIGHT;
 	newmis.abslight = 1;
 	newmis.skin = 1;
-	makevectors (self.velocity);
+	move_angle = vectoangles(self.velocity);
+	move_angle_x *= -1;
+	makevectors (move_angle);
 	traceline ( (self.origin - (v_forward * 24.00000)), (self.origin + (v_forward * 48.00000)), 1, self);
 	if ((trace_ent.classname == "worldspawn") && (trace_fraction < 1)) {
 		//sprint(self.owner, "hit a wall!\n");

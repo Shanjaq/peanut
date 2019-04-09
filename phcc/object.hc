@@ -874,7 +874,7 @@ void  ()obj_ballista =  {
 	precache_sound ( "weapons/ballwind.wav");
 	if ( !self.mass ) {
 
-		self.mass = 1000.00000;
+		self.mass = 9999;
 
 	}
 	CreateEntityNew ( self, ENT_BALLISTA, "models/ballista.mdl", chunk_death);

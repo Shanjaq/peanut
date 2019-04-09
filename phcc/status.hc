@@ -42,7 +42,6 @@ void() burn_status_effect =
 	if ((pc == CONTENT_WATER) || (pc == CONTENT_SLIME) || (self.goalentity.status_effects & STATUS_WET))
 	{
 		self.burn_time = time;
-		setorigin(self, self.goalentity.origin);
 		sound (self, CHAN_WEAPON, "misc/fout.wav", 1, ATTN_NORM);
 		return;
 	}
@@ -130,7 +129,6 @@ void() toxic_status_effect =
 	if ((pc == CONTENT_WATER) || (self.goalentity.status_effects & STATUS_WET))
 	{
 		self.toxic_time = time;
-		setorigin(self, self.goalentity.origin);
 		sound (self, CHAN_WEAPON, "misc/fout.wav", 1, ATTN_NORM);
 		return;
 	}
@@ -199,6 +197,7 @@ void() status_controller_think =
 	
 	if ((self.goalentity.origin == VEC_ORIGIN) || (self.goalentity == world))
 	{
+		sound ( self, CHAN_WEAPON, "misc/null.wav", 0.30000, ATTN_NORM);
 		self.think = remove_status_controller;
 		AdvanceThinkTime(self, HX_FRAME_TIME);
 		return;
