@@ -177,17 +177,25 @@ void  ()FreezeTouch =  {
 			}
 
 		}
+		self.dmg = 16;
+		if (other.status_effects & STATUS_WET)
+		{
+			self.dmg *= 2.00000;
+			particle2 ( self.origin, ('-15.00000 -15.00000 -15.00000' + (self.velocity * 0.0125)), ('15.00000 15.00000 15.00000' + (self.velocity * 0.125)), (144.00000 + random(15.00000)), PARTICLETYPE_BLOB, 7.00000);
+			particle2 ( self.origin, '-7.00000 -7.00000 -7.00000', '7.00000 7.00000 7.00000', (144.00000 + random(15.00000)), PARTICLETYPE_BLOB, 12.00000);
+		}
+		
 		if ( (other.flags & FL_COLDHEAL) ) {
 
 			T_Damage ( other, self, self.owner, 5.00000);
 		} else {
 
-			if ( ((((((other.health <= 20.00000) || (((other.classname == "player") && (other.frozen <= -5.00000)) && (other.health < 200.00000))) && (other.solid != SOLID_BSP)) && !(other.artifact_active & ART_INVINCIBILITY)) && (other.thingtype == THINGTYPE_FLESH)) && (other.health < 100.00000)) ) {
+			if ( ((((((other.health <= (self.dmg + 4)) || (((other.classname == "player") && (other.frozen <= -5.00000)) && (other.health < 200.00000))) && (other.solid != SOLID_BSP)) && !(other.artifact_active & ART_INVINCIBILITY)) && (other.thingtype == THINGTYPE_FLESH)) && (other.health < 100.00000)) ) {
 
 				SnowJob ( other, self.owner);
 			} else {
 
-				T_Damage ( other, self, self.owner, 16.00000);
+				T_Damage ( other, self, self.owner, self.dmg);
 
 			}
 

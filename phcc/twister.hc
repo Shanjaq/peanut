@@ -165,7 +165,7 @@ void() junker_think = {
 			if (((head.classname == "razorwind") || (head.classname == "aero"))&& (head.auraV != 1)) {
 				head.auraV = 1;
 			}
-			if ((vlen(head.origin - self.origin) < 400) ) {
+			if ((vlen(head.origin - self.origin) < 400) && (head.mass < 9999)) {
 				pull_speed = 0.5;
 				normalize(pull);
 				pull *= pull_speed;
@@ -176,7 +176,7 @@ void() junker_think = {
 				head.velocity += pull;
 			}
 
-			if ((vlen(head.origin - self.origin) < 300) ) {
+			if ((vlen(head.origin - self.origin) < 300) && (head.mass < 9999)) {
 				pull_speed = 1;
 				normalize(pull);
 				pull *= pull_speed;
@@ -186,7 +186,7 @@ void() junker_think = {
 				pull_z = 0;
 				head.velocity += pull;
 			}
-			if ((vlen(head.origin - self.origin) < 200) ) {
+			if ((vlen(head.origin - self.origin) < 200) && (head.mass < 9999)) {
 				pull_speed = 2;
 				normalize(pull);
 				pull *= pull_speed;
@@ -197,7 +197,7 @@ void() junker_think = {
 				head.velocity += pull;
 
 			}
-			if ((vlen(head.origin - self.origin) < 100) ) {
+			if ((vlen(head.origin - self.origin) < 100) && (head.mass < 9999)) {
 				if (head.flags & FL_ONGROUND) {
 					head.flags ^= FL_ONGROUND;
 				}

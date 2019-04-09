@@ -9,7 +9,7 @@ local vector push = '0.00000 0.00000 0.00000';
 	while (head)
 	{
 		//if (head.takedamage == DAMAGE_YES) {
-		if ((head.solid != SOLID_BSP) && (head.movetype != MOVETYPE_NOCLIP) && (head != self.owner) && (head.classname != "bloodspot") && (head.touch != puzzle_touch) && (head.touch != weapon_touch))
+		if ((head.solid != SOLID_BSP) && (head.movetype != MOVETYPE_NOCLIP) && (head.mass < 9999) && (head != self.owner) && (head.classname != "bloodspot") && (head.touch != puzzle_touch) && (head.touch != weapon_touch))
 		{
 			if (head.flags & FL_ONGROUND) {
 				head.flags ^= FL_ONGROUND;

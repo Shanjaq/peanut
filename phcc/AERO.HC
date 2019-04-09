@@ -83,7 +83,7 @@ void ()aero_dissolve = {
 		{
 			dir = normalize(self.origin - found.origin);
 			SpawnPuff ( (found.origin + random(found.mins, found.maxs)) + (dir * ((found.size_x + found.size_y) * 0.25000)), '360.00000 360.00000 360.00000', 3.00000, found);
-			if ((found.solid != SOLID_BSP) && (found.movetype != MOVETYPE_NOCLIP) && (found.classname != "aero") && (found.classname != "bloodspot"))
+			if ((found.solid != SOLID_BSP) && (found.movetype != MOVETYPE_NOCLIP) && (found.mass < 9999) && (found.classname != "aero") && (found.classname != "bloodspot"))
 			{
 				if (found.flags & FL_ONGROUND) {
 					found.flags ^= FL_ONGROUND;
@@ -132,7 +132,7 @@ void ()aero_whip = {
 	while (head)
 	{
 		//if (head.takedamage == DAMAGE_YES) {
-		if ((head.solid != SOLID_BSP) && (head.movetype != MOVETYPE_NOCLIP) && (head.classname != "aero") && (head.classname != "bloodspot") && (head.touch != puzzle_touch) && (head.touch != weapon_touch))
+		if ((head.solid != SOLID_BSP) && (head.movetype != MOVETYPE_NOCLIP) && (head.mass < 9999) && (head.classname != "aero") && (head.classname != "bloodspot") && (head.touch != puzzle_touch) && (head.touch != weapon_touch))
 		{
 			if (head.flags & FL_ONGROUND) {
 				head.flags ^= FL_ONGROUND;

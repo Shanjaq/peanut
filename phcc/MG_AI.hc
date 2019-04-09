@@ -414,7 +414,7 @@ local float mod = 0.00000;
    old_right = v_right;
    if ( (slope == '0.00000 0.00000 0.00000') ) {
 
-      traceline ( self.origin, (self.origin - '0.00000 0.00000 300.00000'), TRUE, self);
+      traceline ( (self.origin + '0 0 10'), (self.origin - '0.00000 0.00000 300.00000'), TRUE, self);
       if ( ((trace_fraction > 0.05000) && (self.movetype == MOVETYPE_STEP)) ) {
 
          self.flags ^= FL_ONGROUND;
