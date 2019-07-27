@@ -16,14 +16,14 @@ path.hc
 ai.hc
 projbhvr.hc
 ravenai.hc
-MG_AI.hc
+mg_ai.hc
 waypoint.hc
 altdeath.hc
 gametype.hc
 damage.hc
 combat.hc
 artifact.hc
-Ammo.hc // the first new one.
+ammo.hc // the first new one.
 money.hc
 items.hc
 cube.hc
@@ -55,15 +55,15 @@ setstaff.hc
 crossbow.hc
 alarm.hc
 shopkeep.hc
-//Fieldeffect.hc
+//fieldeffect.hc
 weapons.hc
 tripmine.hc
-Teleport.hc
-Volcano.hc
-Frog.hc
+teleport.hc
+volcano.hc
+frog.hc
 balloffire.hc
-Fwave.hc
-STORM.hc
+fwave.hc
+storm.hc
 //magnet.hc
 swarm_rats.hc
 pk.hc
