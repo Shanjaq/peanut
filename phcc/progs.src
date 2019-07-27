@@ -16,7 +16,7 @@ path.hc
 ai.hc
 projbhvr.hc
 ravenai.hc
-mg_ai.hc
+MG_AI.hc
 waypoint.hc
 altdeath.hc
 gametype.hc
