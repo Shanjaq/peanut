@@ -384,7 +384,7 @@ void  ()ArrowThink =  {
 	local vector dir = '0.00000 0.00000 0.00000';
 	dir = normalize ( self.velocity);
 	traceline ( self.origin, (self.origin + (dir * 1000.00000)), FALSE, self);
-	if ( !trace_ent.takedamage ) {
+	if ((self.classname != "bolt") && ( !trace_ent.takedamage )) {
 
 		HomeThink ( );
 

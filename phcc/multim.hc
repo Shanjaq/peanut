@@ -132,7 +132,7 @@ void ()spawn_refresh = {
 		
 		while ( (search != world) ) {
 			if (search.flags & FL_CLIENT) {
-				if (vlen(search.origin - self.origin) < 1625) {
+				if (vlen(search.origin - self.origin) < 2438) {
 					total += 1.00000;
 				}
 						
